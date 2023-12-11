@@ -1,12 +1,17 @@
 import Circle from "../UIComponents/Circle";
 
-function Game({ score, circles, stopHandler, clickHandler }) {
+function Game({ score, circles, stopHandler, clickHandler, current }) {
   return (
     <div>
-      <p>{score}</p>
-      <div>
+      <p className="score">{score}</p>
+      <div className="circles">
         {circles.map((_, i) => (
-          <Circle key={i} clickHandler={clickHandler} />
+          <Circle
+            key={i}
+            id={i}
+            clickHandler={clickHandler}
+            current={current === i}
+          />
         ))}
       </div>
       <button onClick={stopHandler}>End game</button>

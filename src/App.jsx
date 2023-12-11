@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import NewGame from "./components/NewGame";
 import { levels } from "./levels";
 import Game from "./components/Game";
 import GameOver from "./components/GameOver";
 
-const getRndInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
+const getRndInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
 function App() {
   const [player, setPlayer] = useState();
@@ -14,36 +13,47 @@ function App() {
   const [gameLaunch, setGameLaunch] = useState(true);
   const [gameOn, setGameOn] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const [current, setCurrent] = useState(-1);
+  const [current, setCurrent] = useState(0);
 
-  let timer;
+  const timeoutIdRef = useRef(null);
+  const rounds = useRef(0);
+  const currentInst = useRef(0);
+
   let pace = 1000;
+  let levelsAmount;
 
   const gameSetHandler = (level, name) => {
     // Based on level, we find the matching object from levels array(js), and then make an array for the circles, with amount in the object.
     const levelIndex = levels.findIndex((el) => el.name === level);
-    const levelAmount = levels[levelIndex].amount;
+    levelsAmount = levels[levelIndex].amount;
+
+    /* same as above^ const {amount} = levels.find(el => el.name === level);
+    const levelAmount = amount; */
 
     const circlesArray = Array.from(
       {
-        length: levelAmount,
+        length: levelsAmount,
       },
-      (x, i) => i
+      (_, i) => i
     );
     console.log("circlesArray", circlesArray);
-    console.log("Amount of circles", levelAmount);
+    console.log("Amount of circles", levelsAmount);
     setCircles(circlesArray);
 
     setPlayer({ level: level, name: name });
-    setGameLaunch(!gameLaunch);
+    setGameLaunch((prevLaunch) => !prevLaunch);
     setGameOn(!gameOn);
     randomNumb();
   };
 
   const stopHandler = () => {
-    setGameOn(!gameOn);
-    setGameOver(!gameOver); // Explain this ! thing.
-    clearTimeout(timer);
+    clearTimeout(timeoutIdRef.current);
+    timeoutIdRef.current = null;
+
+    setGameOn(false);
+    setGameOver(!gameOver);
+    rounds.current = null;
+    pace = 1000;
   };
 
   const closeHandler = () => {
@@ -53,19 +63,31 @@ function App() {
   };
 
   const clickHandler = (id) => {
+    if (current !== id) {
+      stopHandler();
+      return;
+    }
     setScore(score + 1);
+    rounds.current--;
   };
 
   const randomNumb = () => {
+    if (rounds.current >= 3) {
+      stopHandler();
+      return;
+    }
+
     let nextActive;
 
     do {
-      nextActive = getRndInt(0, circles.length);
-    } while (nextActive === current);
+      nextActive = getRndInt(0, levelsAmount);
+    } while (nextActive === currentInst.current);
 
     setCurrent(nextActive);
-
-    timer = setTimeout(randomNumb, pace);
+    currentInst.current = nextActive;
+    rounds.current++;
+    timeoutIdRef.current = setTimeout(randomNumb, pace);
+    pace *= 0.95;
   };
 
   return (
@@ -78,6 +100,7 @@ function App() {
           circles={circles}
           stopHandler={stopHandler}
           clickHandler={clickHandler}
+          current={current}
         />
       )}
       {gameOver && (
