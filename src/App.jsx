@@ -3,6 +3,9 @@ import NewGame from "./components/NewGame";
 import { levels } from "./levels";
 import Game from "./components/Game";
 import GameOver from "./components/GameOver";
+import mosq from "./assets/mosq.mp3";
+import mortalkombat from "./assets/MortalKombat.mp3";
+import deagle from "./assets/deagle.mp3";
 
 const getRndInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
@@ -21,6 +24,10 @@ function App() {
 
   let pace = 1000;
   let levelsAmount;
+  //sounds
+  const deagleRef = useRef(new Audio(deagle));
+  const mosqRef = useRef(new Audio(mosq));
+  const MKRef = useRef(new Audio(mortalkombat));
 
   const gameSetHandler = (level, name) => {
     // Based on level, we find the matching object from levels array(js), and then make an array for the circles, with amount in the object.
@@ -44,6 +51,7 @@ function App() {
     setGameLaunch((prevLaunch) => !prevLaunch);
     setGameOn(!gameOn);
     randomNumb();
+    mosqRef.current.play();
   };
 
   const stopHandler = () => {
@@ -54,12 +62,19 @@ function App() {
     setGameOver(!gameOver);
     rounds.current = null;
     pace = 1000;
+    setTimeout(() => {
+      MKRef.current.play();
+    }, 1000);
+    mosqRef.current.pause();
   };
 
   const closeHandler = () => {
     setGameOver(!gameOver);
     setGameLaunch(!gameLaunch);
     setScore(0);
+    MKRef.current.pause();
+    MKRef.current.currentTime = 0;
+    mosqRef.current.pause();
   };
 
   const clickHandler = (id) => {
@@ -67,8 +82,12 @@ function App() {
       stopHandler();
       return;
     }
-    setScore(score + 1);
+    setScore(score + 10);
+
     rounds.current--;
+
+    deagleRef.current.currentTime = 0;
+    deagleRef.current.play();
   };
 
   const randomNumb = () => {
@@ -92,7 +111,7 @@ function App() {
 
   return (
     <>
-      <h1>Catch the snow!</h1>
+      <h1>You are being hunted by mosquitoes!</h1>
       {gameLaunch && <NewGame onclick={gameSetHandler} />}
       {gameOn && (
         <Game
@@ -106,6 +125,9 @@ function App() {
       {gameOver && (
         <GameOver closeHandler={closeHandler} {...player} score={score} />
       )}
+      <div className="footer">
+        <footer>Copyright BenPet 2023 ©</footer>
+      </div>
     </>
   );
 }

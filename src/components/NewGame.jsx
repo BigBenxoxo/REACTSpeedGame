@@ -7,12 +7,23 @@ function NewGame({ onclick }) {
   };
   return (
     <div>
-      <h2>Start a game by choosing a difficulty and entering your name</h2>
+      <h2>Start the game by entering your name and choosing a difficulty</h2>
+      <br></br>
+      <h6>Then use your gun to blast those nasty suckers!</h6>
       <input type="text" onChange={inputHandler} />
       <div>
-        <button onClick={() => onclick("easy", name)}>Easy</button>
-        <button onClick={() => onclick("medium", name)}>Medium</button>
-        <button onClick={() => onclick("hard", name)}>Hard</button>
+        <button className="difficultybtn" onClick={() => onclick("easy", name)}>
+          Easy
+        </button>
+        <button
+          className="difficultybtn"
+          onClick={() => onclick("medium", name)}
+        >
+          Medium
+        </button>
+        <button className="difficultybtn" onClick={() => onclick("hard", name)}>
+          Hard
+        </button>
       </div>
     </div>
   );

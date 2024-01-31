@@ -5,7 +5,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,19 +13,17 @@
   -webkit-text-size-adjust: 100%;
 }
 
-
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
-
   background-image: url(https://www.everwallpaper.co.uk/cdn/shop/products/sketched-effect-jungle-wallpaper-mural-for-room-decor.jpg?v=1682058333);
   text-align: center;
-  font-family: 'Nosifer'; 
-  margin: 50px; 
+  font-family: "Nosifer";
+  margin: 50px;
   background-repeat: no-repeat;
   background-size: cover;
   font-size: 1.5rem;
@@ -36,10 +33,9 @@ body {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-justify-content: center;
+  justify-content: center;
 }
 .circle {
-
   height: 160px;
   width: 160px;
   border-radius: 50%;
@@ -48,12 +44,10 @@ justify-content: center;
   justify-content: center;
   background-color: rgba(255, 99, 71, 0.638);
   margin: 1rem;
-  
-  
 }
 
 .circle.active {
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/dc/Mosquito_2007-2.jpg');
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/d/dc/Mosquito_2007-2.jpg");
   background-size: cover;
 }
 .overlay {
@@ -69,135 +63,35 @@ justify-content: center;
   align-items: center;
 }
 
-.modal {
-  background-color: whitesmoke;
-  border-radius: 50px;
-  padding: 35px;
-  text-align: center;
-  box-shadow: 0 4px 8px 0 darkgray;
-}
-
-#closeModal {
-  background-color: rgba(245, 245, 245, 0);
-  color: black;
-  padding: 2px;
-  margin-top: 20px;
-  cursor: pointer;
-}
-#closeModal:hover {
-  background-color: red;
-  cursor: pointer;
-}
-
 h1 {
-margin-top: 45px;
-font-size: 5rem;
-  color: black;
+  margin-top: 45px;
+  font-size: 3rem;
+  color: rgb(188, 3, 3);
   font-weight: bolder;
   letter-spacing: 0.5rem;
 }
 
+.endButton {
+  background-color: rgb(231, 136, 12);
+  border-radius: 5px;
+  padding: 0.2rem;
+  margin: 0.1rem;
+}
 
-#shoot {
+.endButton:hover {
+  cursor: pointer;
+  background-color: rgba(231, 136, 12, 0.717);
+}
 
-  font-size: 2rem;
-  color: rgb(219, 4, 4);
+h2 {
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
   font-weight: bold;
-}
-
-#startButton {
-
-  background-color: rgba(255, 99, 71, 0);
-  color: whitesmoke;
-  cursor: pointer;
-  border-style: none;
-  font-family: inherit;
-  font-size: 3rem;
-  border-radius: 15px;
-  margin: 10px 20px 20px;
-  padding: 1rem;
-  letter-spacing: 0.5rem;
-}
-
-#endButton {
-  background-color: rgba(255, 99, 71, 0);
-  color: whitesmoke;
-  cursor: pointer;
-  border-style: none;
-  font-family: inherit;
-  font-size: 3rem;
-  border-radius: 15px;
-  margin: 10px 20px 20px;
-  padding: 1rem;
-  letter-spacing: 0.5rem;
-}
-
-h2{
-  color: red;
-}
-
-#instmodal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(245, 245, 245, 0.635);
-  z-index: 1;
-  justify-content: center;
-  align-items: center;
-
-}
-
-#meat {
-  background-color: whitesmoke;
-  border-radius: 50px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 8px 0 darkgray;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-#instButton {
-background: rgb(245, 245, 245);
-  padding: 1rem;
-  cursor: pointer;
-  border-radius: 30px;
-  float: right;
-  margin-top: 50px;
-}
-
-#red {
-
-  color:red;
-}
-
-#closeinst {
-  background-color: rgba(240, 248, 255, 0);
-}
-
-#closeinst:hover {
-  cursor: pointer;
-  background-color: red;
-}
-
-#instButton:hover {
-  cursor: pointer;
-  background-color: rgba(245, 245, 245, 0.717);
-}
-#startButton:hover {
-  cursor: pointer;
-  color: red;
 }
 
 .circle:hover {
   cursor: crosshair;
 }
-
-
-
-
 
 .overlay {
   position: fixed;
@@ -209,12 +103,12 @@ background: rgb(245, 245, 245);
   display: grid;
   justify-items: center;
   align-items: center;
-  color: #333;
 }
 
 .gameover_box {
   background: white;
-  padding: 1rem;
+  color: black;
+  padding: 1.5rem;
   width: 40%;
   min-height: 25%;
   border-radius: 5px;
@@ -231,5 +125,64 @@ background: rgb(245, 245, 245);
   top: -15px;
   right: -15px;
   cursor: pointer;
-  padding:0
+  padding: 0;
+}
+
+input {
+  margin-top: 2rem;
+  outline: none;
+  padding: 0.3rem;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.643);
+  color: rgba(245, 245, 245, 0.712);
+  font-size: 0.8rem;
+}
+
+#modalheading {
+  color: black;
+  font-size: larger;
+}
+
+.gameoverbtn {
+  color: rgb(231, 136, 12);
+  border-style: none;
+  font-family: inherit;
+  font-size: 2rem;
+  border-radius: 15px;
+  margin: 20px 20px 20px;
+  padding: 1rem;
+  letter-spacing: 0.5rem;
+}
+
+.gameoverbtn:hover {
+  cursor: pointer;
+  color: rgba(231, 136, 12, 0.717);
+}
+
+.difficultybtn {
+  background-color: rgb(231, 136, 12);
+  border-radius: 5px;
+  padding: 0.2rem;
+  margin: 0.1rem;
+}
+
+.difficultybtn:hover {
+  cursor: pointer;
+  background-color: rgba(231, 136, 12, 0.717);
+}
+
+h6 {
+  font-size: 1rem;
+  color: whitesmoke;
 }

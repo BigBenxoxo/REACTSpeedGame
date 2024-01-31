@@ -14,7 +14,9 @@ function Game({ score, circles, stopHandler, clickHandler, current }) {
           />
         ))}
       </div>
-      <button onClick={stopHandler}>End game</button>
+      <button className="endButton" onClick={stopHandler}>
+        End game
+      </button>
     </div>
   );
 }
